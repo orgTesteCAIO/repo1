@@ -15,14 +15,12 @@ jobs:
       - name: Pass Step
         run: echo "Passing step"
       - name: Notify Teams - Stage
-        id: notification
         if: always() && (github.ref == 'refs/heads/stage') 
         uses: sergioaten/msteams-notifications@v0.1-beta
         with:
           webhook: ${{ secrets.MS_TEAMS_WEBHOOK }}
           steps: ${{ toJson(steps) }}
       - name: Notify Teams - Quality - Failure
-        id: notification
         if: failure() && (github.ref == 'refs/heads/quality') 
         uses: sergioaten/msteams-notifications@v0.1-beta
         with:
